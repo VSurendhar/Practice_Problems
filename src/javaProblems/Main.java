@@ -1,95 +1,62 @@
 package javaProblems;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 class Main {
 
     public static void main(String[] args) {
-        int m = 5;
-        int n = 5;
+
+        int[] nums = {0,3};
+        int[][] queries = {{0,1},{0,0},{0,1},{0,1},{0,0}};
         Main main = new Main();
-//        System.out.println(main.colorTheGrid(m, n));
-        int a = 1024;
-        System.out.println(Integer.toBinaryString(a));
-        int res = setCurLastValue(a , 5 , 0 , 3);
-        System.out.println(Integer.toBinaryString(res));
-        System.out.println(Integer.toBinaryString(main.removeCurLastValue(res , 5 , 0 )));
-    }
-
-    public int colorTheGrid(int m, int n) {
-
-//        00 - NULL
-//        01 - R
-//        10 - G
-//        11 - B
-
-        int mod = (int) 1e9+7;
-        int[][] memo = new int[1025][1024];
-        int prev = 0;
-        int cur = 0 ;
-        return helper(0, 0,prev , cur, m  , n,mod);
+        System.out.println(main.maxRemoval(nums, queries));
 
     }
 
-    private int helper(int row, int col, int prev, int cur, int m , int n ,int mod) {
+    public int maxRemoval(int[] nums, int[][] queries) {
 
-        if(row >= m){
-            return helper(0 , col+1 , cur , 0 , m , n ,  mod);
-        }
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
 
-        if(col == n){
-            return 1;
-        }
+        pq.addAll(Arrays.asList(queries));
 
-        int ans =0;
+        int i = 0;
+        int polls = 0;
 
-        for(int color =1 ; color<=3 ; color++){
-            boolean canFit = true;
-            if(col-1 >= 0 && getPrevLeftValue(prev , m , col) == color){
-                canFit = false;
+        while (i < nums.length) {
+            if (pq.isEmpty()) {
+                break;
             }
-            if(row-1 >= 0 && getCurTopValue(cur ,m , col ) == color){
-                canFit = false;
+            if (nums[i] == 0) {
+                i++;
+                continue;
             }
-            if(canFit){
-                cur = setCurLastValue(cur , m , col , color);
-                ans = (ans+ helper( row+1 , col , prev , cur ,m , n , mod))%mod;
-//                cur = removeCurLastValue(cur , m , col , color);
+            int[] query = pq.poll();
+            if (query[0] > i) {
+                break;
+            }
+            boolean madeChange = false;
+            for (int j = query[0]; j <= query[1]; j++) {
+                if (nums[j] != 0) {
+                    madeChange = true;
+                    nums[j]--;
+                }
+            }
+            if (madeChange) {
+                polls++;
+            }
+            if (nums[i] == 0) {
+                i++;
             }
         }
 
-        return ans;
+        if (i != nums.length) {
+            return -1;
+        }
+
+        return nums.length - polls;
 
     }
-
-    private static int setCurLastValue(int cur, int length, int row, int color){
-        int leftShift = (length - row - 1 )*2;
-        int mask = color<<leftShift;
-        cur = cur | mask;
-        return cur;
-    }
-
-    private int removeCurLastValue(int cur, int length, int row){
-        int leftShift = (length - row - 1 )*2;
-        int mask = 2<<leftShift;
-        mask = ~mask;
-        cur = cur & mask;
-        return cur;
-    }
-
-    private int getCurTopValue(int cur, int length, int col){
-        int leftShift = (length - col - 1 )*2;
-        int mask = 3<<leftShift;
-        cur = cur & mask;
-
-        return cur;
-    }
-
-    private int getPrevLeftValue(int cur, int length, int col){
-        int leftShift = (length - col)*2;
-        int mask = 3<<leftShift;
-        cur = cur & mask;
-        return cur;
-    }
-
 
 
 }
