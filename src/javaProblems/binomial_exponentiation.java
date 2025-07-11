@@ -8,7 +8,7 @@ INTUITION - If the power is odd we save the base by multiplying it in a variable
 
 public class binomial_exponentiation {
     public static void main(String[] args) {
-        power(2, -10);
+        power(2, 10);
     }
 
     private static void power(double x, int n) {
