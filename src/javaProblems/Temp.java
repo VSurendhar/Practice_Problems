@@ -5,7 +5,7 @@ class Temp {
     public static void main(String[] args) {
         int m = 5;
         int n = 5;
-        Main main = new Main();
+        Temp main = new Temp();
         System.out.println(main.colorTheGrid(m, n));
     }
 
