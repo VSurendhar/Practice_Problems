@@ -1,28 +1,31 @@
 package kotlinProblems
 
-fun main() {
+sealed class Shape {
+    abstract fun area(): Double
+    abstract fun perimeter(): Double
+}
 
-    var a = 22
-    var b = 3
-
-    var ans = 0
-
-    while (a >= b) {
-
-        var counter = 0
-
-        while(b shl counter <= a){
-            counter++
-        }
-
-        counter--
-
-        ans += 1 shl counter
-        a -= b shl counter
-
+class Circle : Shape() {
+    override fun area(): Double {
+        return 0.0
     }
 
-    println(ans)
+    override fun perimeter(): Double {
+        return 0.0
+    }
+}
 
+class Square : Shape() {
+    override fun area(): Double {
+        return 0.0
+    }
 
+    override fun perimeter(): Double {
+        return 0.0
+    }
+}
+
+fun main() {
+    val circle: Circle = Circle()
+    println(circle.area())
 }

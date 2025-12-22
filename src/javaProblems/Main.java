@@ -1,24 +1,22 @@
 package javaProblems;
 
+import java.util.Arrays;
+
 class Main {
 
     public static void main(String[] args) {
-        System.out.println((new Main()).kthCharacter(10));
-    }
 
-    public char kthCharacter(int k) {
-        return (char) (countBits(k-1) + ('a'));
-    }
+        int[] arr = {};
 
-    private int countBits(int i) {
-        int count = 0;
+        Arrays.sort(arr);
+        int i = 0;
 
-        while (i != 0) {
-            i = i & (i - 1);
-            count++;
+        while (i < arr.length) {
+            if (arr[i + 1] != arr[i]) {
+                System.out.println(i + 1);
+            }
         }
 
-        return count;
     }
 
 }
