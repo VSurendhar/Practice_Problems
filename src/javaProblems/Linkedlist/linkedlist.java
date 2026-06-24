@@ -36,7 +36,6 @@ public class linkedlist {
 
     public void insertLast(int value){
 
-
         Node node = new Node(value);
 
         if(tail == null)
@@ -54,7 +53,6 @@ public class linkedlist {
             head = tail ;
 
         }
-
 
     }
 

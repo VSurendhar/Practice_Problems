@@ -13,33 +13,10 @@ public class bubblesortRec {
     public static void main(String[] args) {
 
         int[] arr = {1, 6, 3, 8, 4};
-        int r =  0;
-        int c = 0;
-        //sort(arr, r, c , arr.length -1 );
         sort_a(arr , arr.length-1 , 0);
         //System.out.println(Arrays.toString( arr));
         System.out.println(Arrays.toString(arr));
 
-
-    }
-
-
-    public static void sort(int[] arr, int r, int c, int n ) {
-
-
-        if( c == n){
-
-            return;
-        }
-
-        if( arr[c] < arr[c+1]){
-
-
-            swap(arr , c , c+1);
-        }
-
-        sort( arr , r , c+1 , n);
-        sort( arr , r+1 , 0 , n-1);
 
     }
 
