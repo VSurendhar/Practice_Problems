@@ -4,6 +4,8 @@ import java.util.*
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
+// https://www.youtube.com/watch?v=MRx40JVmmF4
+
 data class Person(
     val userId: String,
     val name: String,
